@@ -21,7 +21,6 @@ class CreateRatesTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->integer('rate');
-            $table->
         });
     }
 
