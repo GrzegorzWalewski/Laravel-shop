@@ -1,0 +1,10 @@
+<?php
+
+namespace Shop\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class RateController extends Controller
+{
+    //
+}
