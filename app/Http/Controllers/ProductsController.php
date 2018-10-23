@@ -9,7 +9,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-    	$products = Product::get();
+    	$products = Product::latest()->take(12)->get();
     	return view('product.all',compact('products'));
     }
 }
