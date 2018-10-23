@@ -5,7 +5,7 @@
 <div class="col-md-3 col-sm-6">
     <div class="product-grid">
         <div class="product-image">
-            <a href="/{{ $product->id }}">
+            <a href="{{ url('/') }}/{{ $product->id }}">
                 <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-1.jpg">
                 </a>
                 <ul class="social">
@@ -33,7 +33,7 @@
                     @endif
                 </ul>
                 <div class="product-content">
-                    <h3 class="title"><a href="{{ $product->id }}">{{ $product->title }}</a></h3>
+                    <h3 class="title"><a href="{{ url('/') }}/{{ $product->id }}">{{ $product->title }}</a></h3>
                     <div class="price">$
                         @if($product->discount_id!=0&&$product->discount_id!="")
 

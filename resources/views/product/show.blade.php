@@ -8,7 +8,7 @@
 <div class="col-md-5 col-sm-6 text-right">
 
 	<h1 class="text-center">{{ $product->title }}</h1>
-
+    <p>Category: <a href="{{ url('/') }}/category/{{ $product->category->id }}">{{ $product->category->title }}</a></p>
 	<div class="price">Price: $
     @if($product->discount_id!=0&&$product->discount_id!="")
 	@php($newPrice = $product->price-$product->price*($product->discount->body*0.01))
@@ -39,8 +39,8 @@
     	<p>{{ $product->description }}</p>
     </div>
     <div class="rate">
-    	Few recent rates:
-    	@if($product->rate)
+    	@if(!empty($product->rate[0]))
+    		Few recent rates:
 	    	@foreach($product->rate as $rate)
 		    	<hr>
 		    	{{ $rate->title }} 

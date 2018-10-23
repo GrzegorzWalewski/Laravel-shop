@@ -23,4 +23,8 @@ class Product extends Model
     		"gold" => $averageRate,
     		"grey" => 5-$averageRate];
     }
+    public function category()
+    {
+    	return $this->belongsTo(Category::class);
+    }
 }
