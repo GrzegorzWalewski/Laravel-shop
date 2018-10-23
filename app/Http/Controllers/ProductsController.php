@@ -3,11 +3,13 @@
 namespace Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Shop\Product;
 
 class ProductsController extends Controller
 {
     public function index()
     {
-    	return view('layouts.template');
+    	$products = Product::get();
+    	return view('product.all',compact('products'));
     }
 }
