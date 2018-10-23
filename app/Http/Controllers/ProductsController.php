@@ -12,4 +12,9 @@ class ProductsController extends Controller
     	$products = Product::latest()->take(12)->get();
     	return view('product.all',compact('products'));
     }
+
+    public function show(Product $product)
+    {
+    	return view('product.show',compact('product'));
+    }
 }

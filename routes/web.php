@@ -13,3 +13,5 @@
 Auth::routes();
 
 Route::get('/', 'ProductsController@index');
+
+Route::get('/{product}','ProductsController@show');

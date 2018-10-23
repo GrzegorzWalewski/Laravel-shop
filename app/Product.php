@@ -18,6 +18,7 @@ class Product extends Model
     {
     	$rate = $this->HasMany(Rate::class);
     	$averageRate = $rate->avg('rate');
+    	
     	return $rate = [
     		"gold" => $averageRate,
     		"grey" => 5-$averageRate];
