@@ -17,4 +17,10 @@ class ProductsController extends Controller
     {
     	return view('product.show',compact('product'));
     }
+
+    public function sale()
+    {
+    	$products = Product::latest()->where('discount_id', '!=' , 0)->get();
+    	return view('product.all',compact('products'));
+    }
 }
