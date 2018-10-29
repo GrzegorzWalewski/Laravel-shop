@@ -16,6 +16,8 @@ Auth::routes();
 
 Route::get('/', 'ProductsController@index');
 
+Route::get('/admin', 'ProductsController@index')->middleware('role');
+
 Route::get('/{product}','ProductsController@show');
 
 Route::get('/category/{category}','CategorysController@index');
