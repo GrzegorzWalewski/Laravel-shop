@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $fillable = [
+        'title', 'description', 'category_id', 'discount_id', 'price', 'user_id', 'imgName'
+    ];
+
     public function rate()
     {
     	return $this->HasMany(Rate::class);

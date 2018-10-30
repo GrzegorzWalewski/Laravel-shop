@@ -26,7 +26,7 @@ Route::get('/category/{category}','CategorysController@index');
 
 Route::get('/products/add', 'ProductsController@create')->middleware('role');
 
-Route::get('/products/store', 'ProductsController@store')->middleware('role');
+Route::post('/products/store', 'ProductsController@store')->middleware('role');
 
 Route::get('/products/edit', 'ProductsController@edit')->middleware('role');
 
@@ -36,7 +36,7 @@ Route::get('/products/del', 'ProductsController@del')->middleware('role');
 
 Route::get('/categories/add', 'CategorysController@create')->middleware('role');
 
-Route::get('/categories/store', 'CategorysController@store')->middleware('role');
+Route::post('/categories/store', 'CategorysController@store')->middleware('role');
 
 Route::get('/categories/edit', 'CategorysController@edit')->middleware('role');
 
@@ -46,7 +46,7 @@ Route::get('/categories/del', 'CategorysController@del')->middleware('role');
 
 Route::get('/discounts/add', 'DiscountsController@create')->middleware('role');
 
-Route::get('/discounts/store', 'DiscountsController@store')->middleware('role');
+Route::post('/discounts/store', 'DiscountsController@store')->middleware('role');
 
 Route::get('/discounts/edit', 'DiscountsController@edit')->middleware('role');
 

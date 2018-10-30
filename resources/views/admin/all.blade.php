@@ -3,9 +3,9 @@
 
 <ul>
 	<h1>Products</h1>
-	<li><a href="{{ url('/') }}/product/add">Add</a></li>
-	<li><a href="{{ url('/') }}/product/edit">Edit</a></li>
-	<li><a href="{{ url('/') }}/product/del">Delete</a></li>
+	<li><a href="{{ url('/') }}/products/add">Add</a></li>
+	<li><a href="{{ url('/') }}/products/edit">Edit</a></li>
+	<li><a href="{{ url('/') }}/products/del">Delete</a></li>
 </ul>
 
 <ul>
