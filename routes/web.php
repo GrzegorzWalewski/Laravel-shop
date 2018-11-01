@@ -28,7 +28,7 @@ Route::get('/products/add', 'ProductsController@create')->middleware('role');
 
 Route::post('/products/store', 'ProductsController@store')->middleware('role');
 
-Route::get('/products/edit', 'ProductsController@edit')->middleware('role');
+Route::get('/products/edit/{product}', 'ProductsController@edit')->middleware('role');
 
 Route::get('/products/del', 'ProductsController@del')->middleware('role');
 

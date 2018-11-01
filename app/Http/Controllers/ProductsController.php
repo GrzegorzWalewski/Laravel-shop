@@ -36,6 +36,12 @@ class ProductsController extends Controller
         $discounts = Discount::get();
         return view('product.create',compact('categories','discounts'));
     }
+    public function edit(Product $product)
+    {
+        $categories = Category::get();
+        $discounts = Discount::get();
+        return view('product.edit',compact('categories','discounts','product'));
+    }
     public function store()
     {
         $this->validate(request(),[
@@ -46,7 +52,17 @@ class ProductsController extends Controller
             'price'       => 'required']);
         if(null!==request('id'))
         {
-
+            Product::where('id',request('id'))
+            ->update([
+            'title'       => request('title'),
+            'description' => request('description'),
+            'category_id' => request('category'),
+            'discount_id' => request('discount'),
+            'price'       => request('price'),
+            'imgName'     => "future"
+            ]);
+            $url = url('/')."/products/edit/".request('id');
+            return redirect($url)->with('id',request('id'));
         }
         else
         {

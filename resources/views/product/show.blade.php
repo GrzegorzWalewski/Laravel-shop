@@ -6,7 +6,9 @@
 </div>
 
 <div class="col-md-5 col-sm-6 text-right">
-
+    @if(Auth::check()&&Auth::user()->isAdmin())
+        <a href="{{ url('/') }}/products/edit/{{ $product->id }}">Edit</a>
+    @endif
 	<h1 class="text-center">{{ $product->title }}</h1>
     <p>Category: <a href="{{ url('/') }}/category/{{ $product->category->id }}">{{ $product->category->title }}</a></p>
 	<div class="price">Price: $
