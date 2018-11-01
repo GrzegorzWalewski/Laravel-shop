@@ -20,4 +20,22 @@ class DiscountsController extends Controller
    		$discount->delete();
    		return back();
    	}
+   	public function create()
+   	{
+   		return view('discount.create');
+   	}
+   	public function store()
+   	{
+   		if(substr(request('discount'), -1)=="%")
+   		{
+   			$discount = substr(request('discount'),0, -1);
+   		}
+   		else
+   		{
+   			$discount = request('discount');
+   		}
+   		$data = Discount::Create([
+   			'body'	=> $discount]);
+   		return redirect('/discounts/add')->with('data', $data);
+   	}
 }
