@@ -1,6 +1,11 @@
 @extends('layouts.template')
 @section('content')
 @include('layouts.errors')
+@if(session('id'))
+	<div class="alert alert-success w-100 p-3">
+		Your post was created successfull. You can see it <a href="{{ url('/') }}/{{ session('id') }}">here</a>
+	</div>
+@endif
 <div class="">
 	<h1 class="">Create new post</h1>
 	<form method="POST" action="{{ url('/') }}/products/store">

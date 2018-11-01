@@ -50,14 +50,15 @@ class ProductsController extends Controller
         }
         else
         {
-            Product::Create([
+            $data = Product::Create([
             'title'       => request('title'),
             'description' => request('description'),
             'category_id' => request('category'),
             'discount_id' => request('discount'),
             'price'       => request('price'),
             'imgName'     => "future"]);
-            return redirect('/products/add');
+            $id = $data->id;
+            return redirect('/products/add')->with('id', $id);
         }
     }
 }
