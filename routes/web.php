@@ -38,9 +38,9 @@ Route::get('/categories/add', 'CategorysController@create')->middleware('role');
 
 Route::post('/categories/store', 'CategorysController@store')->middleware('role');
 
-Route::get('/categories/edit', 'CategorysController@edit')->middleware('role');
+Route::get('/categories/del', 'CategorysController@show')->middleware('role');
 
-Route::get('/categories/del', 'CategorysController@del')->middleware('role');
+Route::get('/categories/del/{category}', 'CategorysController@del')->middleware('role');
 
 //Discounts
 
@@ -48,6 +48,6 @@ Route::get('/discounts/add', 'DiscountsController@create')->middleware('role');
 
 Route::post('/discounts/store', 'DiscountsController@store')->middleware('role');
 
-Route::get('/discounts/edit', 'DiscountsController@edit')->middleware('role');
+Route::get('/discounts/del', 'DiscountsController@show')->middleware('role');
 
-Route::get('/discounts/del', 'DiscountsController@del')->middleware('role');
+Route::get('/discounts/del/{discount}', 'DiscountsController@del')->middleware('role');
