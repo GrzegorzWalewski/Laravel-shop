@@ -77,4 +77,9 @@ class ProductsController extends Controller
             return redirect('/products/add')->with('id', $id);
         }
     }
+    public function del(Product $product)
+    {
+        $product->delete();
+        return redirect('/');
+    }
 }

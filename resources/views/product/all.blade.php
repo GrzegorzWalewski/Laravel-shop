@@ -9,8 +9,9 @@
                 <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-1.jpg">
                 </a>
                 <ul class="social">
-                    <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                    <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                    @if(Auth::check()&&Auth::user()->isAdmin())
+                    <li><a href="{{ url('/') }}/products/del/{{ $product->id }}" data-tip="Delete"><i class="fas fa-trash-alt"></i></a></li>
+                    @endif
                     <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                     @if($product->discount_id!=0&&$product->discount_id!="")

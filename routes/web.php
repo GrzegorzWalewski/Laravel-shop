@@ -30,7 +30,7 @@ Route::post('/products/store', 'ProductsController@store')->middleware('role');
 
 Route::get('/products/edit/{product}', 'ProductsController@edit')->middleware('role');
 
-Route::get('/products/del', 'ProductsController@del')->middleware('role');
+Route::get('/products/del/{product}', 'ProductsController@del')->middleware('role');
 
 //Categories
 
