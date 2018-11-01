@@ -4,6 +4,7 @@ namespace Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Shop\Category;
+use Shop\Product;
 
 class CategorysController extends Controller
 {
@@ -30,3 +31,11 @@ class CategorysController extends Controller
     	$categories = Category::get();
     	return view('category.del',compact('categories'));
     }
+    public function del(Category $category)
+    {
+    	$id= $category->id;
+    	Product::whereCategoryId($id)->delete();
+    	$category->delete();
+    	return back();
+    }
+}
