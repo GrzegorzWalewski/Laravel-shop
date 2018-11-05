@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/load', 'ProductsController@load');
+
 Route::get('/sale','ProductsController@sale');
 
 Auth::routes();

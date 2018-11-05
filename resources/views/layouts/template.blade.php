@@ -9,7 +9,7 @@
 @include('layouts.nav')
 <div class="container">
   <br>
-    <div class="row">
+    <div class="row" id="row">
       @yield('content')
     </div>
   </body>

@@ -1,6 +1,3 @@
-@extends('layouts.template')
-
-@section('content')
 @foreach($products as $product)
 <div class="col-md-3 col-sm-6">
     <div class="product-grid">
@@ -51,5 +48,3 @@
             </div>
 </div>
 @endforeach
-<script src="{{ url('/') }}/js/loadProducts.js"></script>
-@endsection

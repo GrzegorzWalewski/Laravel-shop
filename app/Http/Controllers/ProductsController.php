@@ -82,4 +82,11 @@ class ProductsController extends Controller
         $product->delete();
         return redirect('/');
     }
+    public function load()
+    {
+        $from = request('from');
+        $count = 4;
+        $products = Product::latest()->take($count)->where('id','>=',$from)->get();
+        return view('product.ajax', compact('products'));
+    }
 }
