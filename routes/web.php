@@ -14,6 +14,8 @@ Route::get('/load', 'ProductsController@load');
 
 Route::get('/sale','ProductsController@sale');
 
+Route::get('/search/','ProductsController@search');
+
 Auth::routes();
 
 Route::get('/', 'ProductsController@index');

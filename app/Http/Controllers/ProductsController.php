@@ -13,7 +13,8 @@ class ProductsController extends Controller
     public function index()
     {
     	$products = Product::latest()->take(12)->get();
-    	return view('product.all',compact('products'));
+        $load = true;
+    	return view('product.all',compact('products','load'));
     }
 
     public function show(Product $product)
@@ -88,5 +89,11 @@ class ProductsController extends Controller
         $count = 4;
         $products = Product::latest()->take($count)->where('id','>=',$from)->get();
         return view('product.ajax', compact('products'));
+    }
+    public function search()
+    {
+        $search=request('search');
+        $products = Product::latest()->where('title','like','%'.$search."%")->get();
+        return view('product.all',compact('products'));
     }
 }
