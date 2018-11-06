@@ -16,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.nav', function($view){
             $view->with('categories',\Shop\Category::get());
         });
+
+        view()->composer('layouts.nav', function($view){
+            $view->with('cart',\Shop\Cart::countWithPieces());
+        });
     }
 
     /**

@@ -49,6 +49,13 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
             </form>
+            <a class="dropdown-item" id="cart" href="{{ url('/') }}/cart">
+              @if(!$cart<=0)
+                Cart: {{ $cart }}
+              @else
+                No products in cart
+              @endif
+            </a>
           </div>
         </li>
       @endguest

@@ -2,7 +2,7 @@
 
 @section('content')
 @if(!$products->first())
-Unfortunately, we could not find the product you were looking for.
+Unfortunately, there are no products.
 @endif
 @foreach($products as $product)
     <div class="col-md-3 col-sm-6">
@@ -15,7 +15,12 @@ Unfortunately, we could not find the product you were looking for.
                     @if(Auth::check()&&Auth::user()->isAdmin())
                         <li><a href="{{ url('/') }}/products/del/{{ $product->id }}" data-tip="Delete"><i class="fas fa-trash-alt"></i></a></li>
                     @endif
-                    <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+
+                    @guest
+                        <li><a href="#" data-tip="You have to be logged in"><i class="fa fa-shopping-cart"></i></a></li>
+                    @else
+                        <li><a href="#" class="add-to-cart" id="{{ $product->id }}" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    @endguest
                 </ul>
                 @if($product->discount_id!=0&&$product->discount_id!="")
                     <span class="product-new-label">Sale</span>
@@ -49,7 +54,10 @@ Unfortunately, we could not find the product you were looking for.
                         {{ $product->price }}
                     @endif
                 </div>
-                <a class="add-to-cart" href="">+ Add To Cart</a>
+                @guest
+                @else
+                    <a class="add-to-cart" id="{{ $product->id }}" href="">+ Add To Cart</a>
+                @endguest
             </div>
         </div>
     </div>
@@ -57,4 +65,5 @@ Unfortunately, we could not find the product you were looking for.
 @if(isset($load))
     <script src="{{ url('/') }}/js/loadProducts.js"></script>
 @endif
+<script src="{{ url('/') }}/js/cart.js"></script>
 @endsection

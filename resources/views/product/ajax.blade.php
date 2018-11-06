@@ -9,7 +9,11 @@
                     @if(Auth::check()&&Auth::user()->isAdmin())
                     <li><a href="{{ url('/') }}/products/del/{{ $product->id }}" data-tip="Delete"><i class="fas fa-trash-alt"></i></a></li>
                     @endif
-                    <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    @guest
+                        <li><a href="#" data-tip="You have to be logged in"><i class="fa fa-shopping-cart"></i></a></li>
+                    @else
+                        <li><a href="#" id="add-to-cart" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    @endguest
                     </ul>
                     @if($product->discount_id!=0&&$product->discount_id!="")
                         <span class="product-new-label">Sale</span>
@@ -43,7 +47,10 @@
                             {{ $product->price }}
                         @endif
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
+                    @guest
+                    @else
+                        <a class="add-to-cart" id="add-to-cart" href="">+ Add To Cart</a>
+                    @endguest
                 </div>
             </div>
 </div>
