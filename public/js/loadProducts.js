@@ -1,4 +1,18 @@
 var from = 9;
+var categoryId = document.getElementById('category_id');
+var category = "";
+if(categoryId!=null)
+{
+	var category = categoryId.className;
+}
+if(document.getElementById('sale')!=null)
+{
+	var sale = true;
+}
+else
+{
+	var sale = false;
+}
 window.addEventListener("scroll", load);
 function load()
 {
@@ -12,7 +26,7 @@ function load()
 	  		}
 		};
 		
-		xhttp.open('GET','http://localhost:8000/load?from='+from, true);
+		xhttp.open('GET','http://localhost:8000/load?from='+from+'&category='+category+'&sale='+sale, true);
 		xhttp.send();
 	}
 }

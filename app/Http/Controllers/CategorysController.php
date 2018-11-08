@@ -10,7 +10,9 @@ class CategorysController extends Controller
 {
     public function index(Category $category)
     {
-    	return view('category.show',compact('category'));
+        $products = $category->product;
+        $load = true;
+    	return view('product.all',compact('category','products','load'));
     }
     public function create()
     {

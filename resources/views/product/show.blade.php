@@ -6,6 +6,9 @@
 </div>
 
 <div class="col-md-5 col-sm-6 text-right">
+    @if(Auth::check())
+        <a href="#" class="add-to-cart" id="{{ $product->id }}" data-tip="Add to Cart">Add to cart</a>
+    @endif
     @if(Auth::check()&&Auth::user()->isAdmin())
         <a href="{{ url('/') }}/products/del/{{ $product->id }}">Delete</a>
         <a href="{{ url('/') }}/products/edit/{{ $product->id }}">Edit</a>
@@ -64,6 +67,6 @@
         @endif
     </div>
 </div>
-
+<script src="{{ url('/') }}/js/cart.js"></script>
 
 @endsection

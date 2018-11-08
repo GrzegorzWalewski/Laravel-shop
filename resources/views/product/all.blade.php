@@ -1,6 +1,18 @@
 @extends('layouts.template')
 
 @section('content')
+@if(isset($sale))
+    <span id="sale"></span>
+@endif
+@if(isset($category))
+    <div class="col-md-12 col-sm-12 text-center">
+        <span id="category_id" class="{{ $category->id }}"></span>
+        <h1>{{ $category->title }}</h1>
+        <hr>
+        <p>{{ $category->body }}</p>
+        <hr>
+    </div>
+@endif
 @if(!$products->first())
 Unfortunately, there are no products.
 @endif

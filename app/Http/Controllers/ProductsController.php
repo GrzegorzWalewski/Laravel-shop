@@ -24,8 +24,10 @@ class ProductsController extends Controller
 
     public function sale()
     {
-    	$products = Product::latest()->where('discount_id', '!=' , 0)->get();
-    	return view('product.all',compact('products'));
+    	$products = Product::take(12)->where('discount_id', '!=' , 0)->get();
+        $sale = true;
+        $load = true;
+    	return view('product.all',compact('products','sale','load'));
     }
     public function adminPanel()
     {
@@ -86,8 +88,31 @@ class ProductsController extends Controller
     public function load()
     {
         $from = request('from');
+        $category_id = request('category');
         $count = 4;
-        $products = Product::latest()->take($count)->where('id','>=',$from)->get();
+        $sale = request('sale');
+        if($category_id!="")
+        {
+            if($sale)
+            {
+                $products = Product::latest()->take($count)->where('id','>=',$from)->where('category_id',$category_id)->where('discount_id','>',0)->get();
+            }
+            else
+            {
+                $products = Product::latest()->take($count)->where('id','>=',$from)->where('category_id',$category_id)->where('discount_id',0)->get();
+            }
+        }
+        else
+        {
+            if($sale)
+            {
+                $products = Product::latest()->take($count)->where('id','>=',$from)->where('discount_id','>',0)->get();
+            }
+            else
+            {
+                $products = Product::latest()->take($count)->where('id','>=',$from)->where('discount_id',0)->get();
+            }
+        }
         return view('product.ajax', compact('products'));
     }
     public function search()
