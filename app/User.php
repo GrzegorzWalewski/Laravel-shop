@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','role',
     ];
 
     /**
@@ -30,6 +30,17 @@ class User extends Authenticatable
     public function isAdmin()
     {
         if($this->role == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public static function isFirst()
+    {
+        if(User::count()==0)
         {
             return true;
         }

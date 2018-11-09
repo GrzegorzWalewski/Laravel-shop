@@ -7,7 +7,7 @@ use Shop\Product;
 use Shop\Category;
 use Shop\Discount;
 use Illuminate\Support\Facades\Auth;
-
+use Shop\User;
 class ProductsController extends Controller
 {
     public function index()
