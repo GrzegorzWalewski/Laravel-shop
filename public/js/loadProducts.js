@@ -1,15 +1,15 @@
-var from = 9;
+var from = 8;
 var categoryId = document.getElementById('category_id');
 var category = "";
-if(window.location.pathname!="/")
+var search = document.getElementById('searchQuote');
+if(search!=null)
 {
-	var url = window.location.href.replace(window.location.pathname, "");
+	var search = document.getElementById('searchQuote').className;
 }
 else
 {
-	var url = window.location.href;
+	var search = "";
 }
-var url = url.replace('#','');
 if(categoryId!=null)
 {
 	var category = categoryId.className;
@@ -31,11 +31,14 @@ function load()
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 	  	if (this.readyState == 4 && this.status == 200) {
-	    	document.getElementById("row").innerHTML += this.responseText;
+	  		if(this.responseText!="")
+	  		{
+	  			document.getElementById("row").innerHTML += this.responseText;
+	  		}
 	  		}
 		};
 		
-		xhttp.open('GET',url+'/load?from='+from+'&category='+category+'&sale='+sale, true);
+		xhttp.open('GET',window.location.origin+'/load?from='+from+'&searchQuote='+search+'&category='+category+'&sale='+sale, true);
 		xhttp.send();
 	}
 }

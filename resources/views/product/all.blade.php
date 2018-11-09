@@ -1,6 +1,9 @@
 @extends('layouts.template')
 
 @section('content')
+@if(isset($search))
+<span id="searchQuote" class="{{ $search }}"></span>
+@endif
 @if(isset($sale))
     <span id="sale"></span>
 @endif

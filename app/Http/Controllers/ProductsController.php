@@ -90,36 +90,42 @@ class ProductsController extends Controller
     {
         $from = request('from');
         $category_id = request('category');
+        $search = request('searchQuote');
         $count = 4;
         $sale = request('sale');
-        if($category_id!="")
+        if(Product::count()>=$count)
         {
-            if($sale == "true")
+            if($category_id!="")
             {
-                $products = Product::latest()->take($count)->where('id','>=',$from)->where('category_id',$category_id)->where('discount_id','>',0)->get();
+                if($sale == "true")
+                {
+                    $products = Product::where('title','like','%'.$search."%")->skip($from)->take($count)->where('category_id',$category_id)->where('discount_id','>',0)->get();
+                }
+                else
+                {
+                    $products = Product::where('title','like','%'.$search."%")->skip($from)->take($count)->where('category_id',$category_id)->get();
+                }
             }
             else
             {
-                $products = Product::latest()->take($count)->where('id','>=',$from)->where('category_id',$category_id)->get();
+                if($sale == "true")
+                {
+                    $products = Product::where('title','like','%'.$search."%")->skip($from)->take($count)->where('discount_id','>',0)->get();
+                }
+                else
+                {
+                    $products = Product::where('title','like','%'.$search."%")->skip($from)->take($count)->get();
+                }
             }
+            return view('product.ajax', compact('products'));
         }
-        else
-        {
-            if($sale == "true")
-            {
-                $products = Product::latest()->take($count)->where('id','>=',$from)->where('discount_id','>',0)->get();
-            }
-            else
-            {
-                $products = Product::latest()->take($count)->where('id','>=',$from)->get();
-            }
-        }
-        return view('product.ajax', compact('products'));
+        
     }
     public function search()
     {
         $search=request('search');
-        $products = Product::latest()->where('title','like','%'.$search."%")->get();
-        return view('product.all',compact('products'));
+        $products = Product::take(12)->where('title','like','%'.$search."%")->get();
+        $load = true;
+        return view('product.all',compact('products','search','load'));
     }
 }
