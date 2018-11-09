@@ -8,13 +8,13 @@
 @endif
 <div class="">
 	<h1 class="">Create new post</h1>
-	<form method="POST" action="{{ url('/') }}/products/store">
+	<form method="POST" enctype="multipart/form-data" action="{{ url('/') }}/products/store">
 		{{ csrf_field() }}
 
 		<input class="form-control" type="text" name="title" id="title" placeholder="Title" required>
 
 		<textarea class="form-control" name="description" id="description" placeholder="Description" required></textarea>
-
+		<input type="file" name="img" id="img">
 		<select class="form-control" name="category">
 			@foreach($categories as $category)
 				<option value="{{ $category->id }}">{{ $category->title }}</option>

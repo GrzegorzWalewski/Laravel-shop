@@ -21,7 +21,7 @@ Unfortunately, there are no products.
         <div class="product-grid">
             <div class="product-image">
                 <a href="{{ url('/') }}/{{ $product->id }}">
-                    <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-1.jpg">
+                    <img class="pic-all" src="{{ asset('storage/') }}/{{ $product->imgName }}">
                 </a>
                 <ul class="social">
                     @if(Auth::check()&&Auth::user()->isAdmin())

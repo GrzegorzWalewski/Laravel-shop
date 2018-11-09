@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="col-md-6 col-sm-6 product_picture">
-	<img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-1.jpg">
+	<img class="pic-1" src="{{ asset('storage/') }}/{{ $product->imgName }}">
 </div>
 
 <div class="col-md-5 col-sm-6 text-right">

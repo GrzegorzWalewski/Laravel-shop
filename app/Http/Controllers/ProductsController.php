@@ -45,8 +45,10 @@ class ProductsController extends Controller
         $discounts = Discount::get();
         return view('product.edit',compact('categories','discounts','product'));
     }
-    public function store()
+    public function store(Request $request)
     {
+        $path = $request->file('img')->store('public/products');
+        $path = str_replace('public/',"",$path);
         $this->validate(request(),[
             'title'       => 'required',
             'description' => 'required',
@@ -61,8 +63,7 @@ class ProductsController extends Controller
             'description' => request('description'),
             'category_id' => request('category'),
             'discount_id' => request('discount'),
-            'price'       => request('price'),
-            'imgName'     => "future"
+            'price'       => request('price')
             ]);
             $url = url('/')."/products/edit/".request('id');
             return redirect($url)->with('id',request('id'));
@@ -75,7 +76,7 @@ class ProductsController extends Controller
             'category_id' => request('category'),
             'discount_id' => request('discount'),
             'price'       => request('price'),
-            'imgName'     => "future"]);
+            'imgName'     => $path]);
             $id = $data->id;
             return redirect('/products/add')->with('id', $id);
         }
