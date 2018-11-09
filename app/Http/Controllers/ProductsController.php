@@ -93,24 +93,24 @@ class ProductsController extends Controller
         $sale = request('sale');
         if($category_id!="")
         {
-            if($sale)
+            if($sale == "true")
             {
                 $products = Product::latest()->take($count)->where('id','>=',$from)->where('category_id',$category_id)->where('discount_id','>',0)->get();
             }
             else
             {
-                $products = Product::latest()->take($count)->where('id','>=',$from)->where('category_id',$category_id)->where('discount_id',0)->get();
+                $products = Product::latest()->take($count)->where('id','>=',$from)->where('category_id',$category_id)->get();
             }
         }
         else
         {
-            if($sale)
+            if($sale == "true")
             {
                 $products = Product::latest()->take($count)->where('id','>=',$from)->where('discount_id','>',0)->get();
             }
             else
             {
-                $products = Product::latest()->take($count)->where('id','>=',$from)->where('discount_id',0)->get();
+                $products = Product::latest()->take($count)->where('id','>=',$from)->get();
             }
         }
         return view('product.ajax', compact('products'));

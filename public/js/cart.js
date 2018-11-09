@@ -1,3 +1,12 @@
+if(window.location.pathname!="/")
+{
+	var url = window.location.href.replace(window.location.pathname, "");
+}
+else
+{
+	var url = window.location.href;
+}
+var url = url.replace('#','');
 var products = document.getElementsByClassName("add-to-cart");
 for (var i = 0; i < products.length; i++) 
 {
@@ -14,6 +23,6 @@ function put(id)
 	  		}
 		};
 		
-		xhttp.open('GET','http://localhost:8000/cart/add?id='+id, true);
+		xhttp.open('GET',url+'/cart/add?id='+id, true);
 		xhttp.send();
 }
