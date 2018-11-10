@@ -19,7 +19,9 @@
 						{{ $product->title }}
 					</td>
 					<td>
+						<a href="/cart/decrease/{{ $products->id }}">-</a>
 						{{ $products->pieces }}
+						<a href="/cart/increase/{{ $products->id }}">+</a>
 					</td>
 					<td>
 						{{ $product->price }}
