@@ -32,7 +32,17 @@ class Cart extends Model
         $sum = 0;
         foreach($carts as $cart)
         {
-            $sum += $cart->pieces*$cart->price;
+            $product = Product::getDetails($cart->product_id);
+            if($product->discount_id!=0)
+            {
+                $discount = Discount::getDetails($product->discount_id)->body*0.01;
+                $price = $cart->price - $cart->price*$discount;
+                $sum += $cart->pieces*$price;
+            }
+            else
+            {
+                $sum += $cart->pieces*$cart->price;
+            }  
         }
         return $sum;
     }

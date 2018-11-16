@@ -6,6 +6,9 @@
 	</div>
 	@else
 		<table>
+			<caption style="caption-side:bottom">
+				<a class="" href="{{ url('/') }}/buy">Buy</a>
+			</caption>
 			<tr>
 				<td>Product name: </td>
 				<td>Pieces: </td>
@@ -24,11 +27,16 @@
 						<a href="{{ url('/') }}/cart/increase/{{ $products->id }}">+</a>
 					</td>
 					<td>
-						{{ $product->price }}
+						@if($product->discount_id!=0&&$product->discount_id!="")
+						@php($newPrice = $product->price-$product->price*($product->discount->body*0.01))
+					        {{ $newPrice }}zl
+					        <span class="discount_price">{{ $product->price }}zl</span>
+					    @else
+					        {{ $product->price }}zl
+					    @endif
 						<a href="{{ url('/') }}/cart/del/{{ $products->id }}"><i class="fas fa-times"></i></a>
 					</td>
 				</tr>
-				@php($total+=((int)$product->price*(int)$products->pieces))
 			@endforeach
 			<tr>
 				<td>
@@ -37,11 +45,9 @@
 				<td>
 				</td>
 				<td>
-					{{ $total }}
+					{{ Shop\Cart::sumCart() }}zl
 				</td>
 			</tr>
 		</table>
-	</br>
-	<a href="{{ url('/') }}/buy">Buy</a>
 	@endif
 @endsection

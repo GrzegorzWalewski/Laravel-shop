@@ -28,8 +28,6 @@
 		<textarea rows="3" class="form-control" name="description" id="description" required readonly>{{ $d['description'] }}</textarea>
 		Price({{ $d['currency'] }}):
 		<input class="form-control" type="text" name="amount" id="amount" required  value="{{ $d['amount'] }}" readonly>
-		
 		<button class="form-control" type="submit">Submit and go to payment</button>
-
 </form>
 @endsection

@@ -47,8 +47,6 @@ class ProductsController extends Controller
     }
     public function store(Request $request)
     {
-        $path = $request->file('img')->store('public/products');
-        $path = str_replace('public/',"",$path);
         $this->validate(request(),[
             'title'       => 'required',
             'description' => 'required',
@@ -70,6 +68,8 @@ class ProductsController extends Controller
         }
         else
         {
+            $path = $request->file('img')->store('public/products');
+            $path = str_replace('public/',"",$path);
             $data = Product::Create([
             'title'       => request('title'),
             'description' => request('description'),
