@@ -31,4 +31,10 @@ class Product extends Model
     {
     	return $this->belongsTo(Category::class);
     }
+    public static function getDetails($id)
+    {
+        $product = Product::where('id',$id)->get();
+        return $product[0];
+    }
+
 }

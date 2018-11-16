@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/buy','CartsController@submit');
+
 Route::get('/cart/increase/{cart}','CartsController@increase');
 
 Route::get('/cart/decrease/{cart}','CartsController@decrease');

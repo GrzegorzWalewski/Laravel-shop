@@ -19,13 +19,13 @@
 						{{ $product->title }}
 					</td>
 					<td>
-						<a href="/cart/decrease/{{ $products->id }}">-</a>
+						<a href="{{ url('/') }}/cart/decrease/{{ $products->id }}">-</a>
 						{{ $products->pieces }}
-						<a href="/cart/increase/{{ $products->id }}">+</a>
+						<a href="{{ url('/') }}/cart/increase/{{ $products->id }}">+</a>
 					</td>
 					<td>
 						{{ $product->price }}
-						<a href="/cart/del/{{ $products->id }}"><i class="fas fa-times"></i></a>
+						<a href="{{ url('/') }}/cart/del/{{ $products->id }}"><i class="fas fa-times"></i></a>
 					</td>
 				</tr>
 				@php($total+=((int)$product->price*(int)$products->pieces))
@@ -41,5 +41,7 @@
 				</td>
 			</tr>
 		</table>
+	</br>
+	<a href="{{ url('/') }}/buy">Buy</a>
 	@endif
 @endsection

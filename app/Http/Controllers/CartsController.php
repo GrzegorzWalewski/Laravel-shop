@@ -5,6 +5,7 @@ namespace Shop\Http\Controllers;
 use Illuminate\Http\Request;
 use Shop\Cart;
 use Illuminate\Support\Facades\Auth;
+use Shop\Product;
 
 class CartsController extends Controller
 {
@@ -20,6 +21,7 @@ class CartsController extends Controller
 	    	Cart::Create([
 	    		'user_id' 	 => Auth::user()->id,
 	    		'product_id' => $product_id,
+                'price'      => Product::getDetails($product_id)->price,
 	    		'pieces'	 => 1
 	    		]);
     	}
@@ -53,5 +55,48 @@ class CartsController extends Controller
             $cart->update(['pieces' => $pieces-1]);
         }
         return back();
+    }
+    public function submit()
+    {
+        $cart = Cart::latest()->where('user_id',Auth::user()->id)->get();
+        $products = [];
+        $i = 0;
+        foreach($cart as $product)
+        {
+            $products[$i] = Product::getDetails($product->product_id);
+            $i++;
+        }
+        $price = Cart::sumCart();
+        $description = "";
+        $i = 0;
+        foreach($cart as $product)
+        {
+            if($description == "")
+            {
+                $description = $description.$products[$i]->title." x ".$product->pieces; 
+            }
+            else
+            {
+                $description = $description.", ".$products[$i]->title." x ".$product->pieces; 
+            }
+            
+            $i++;
+        }
+        $paymentDetails= [
+            'pin'         => 'dgdGtRbkYlEzs3GX5txsiXe4564vBTsC',
+            'api_version' => 'dev',
+            'id'          => '759128',
+            'description' => $description,
+            'amount'      => $price,
+            'currency'    => 'PLN',
+            'url'         => url('/')."/success",
+            'type'        => 0,
+            'buttontext'  => "Go back to Laravel-shop",
+            'email'       => "grzojda@gmail.com",
+            'p_email'     => Auth::user()->email
+        ];
+        $chk = $paymentDetails['pin'].$paymentDetails['api_version'].$paymentDetails['id'].$paymentDetails['amount'].$paymentDetails['currency'].$paymentDetails['description'].$paymentDetails['url'].$paymentDetails['type'].$paymentDetails['buttontext'].$paymentDetails['email'].$paymentDetails['p_email'];
+        $ChkValue = hash('sha256',$chk);
+        return view('product.submit', compact('paymentDetails','ChkValue'));
     }
 }
