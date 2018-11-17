@@ -193,3 +193,12 @@
 {
   position: relative;
 }
+.productAmmount
+{
+  font-size: 20px;
+
+}
+.productAmmount:hover
+{
+  text-decoration: none;
+}
