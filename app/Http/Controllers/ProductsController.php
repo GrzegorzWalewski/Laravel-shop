@@ -8,6 +8,7 @@ use Shop\Category;
 use Shop\Discount;
 use Illuminate\Support\Facades\Auth;
 use Shop\User;
+use Shop\Bought;
 class ProductsController extends Controller
 {
     public function index()
@@ -19,7 +20,8 @@ class ProductsController extends Controller
 
     public function show(Product $product)
     {
-    	return view('product.show',compact('product'));
+        $wasBought = Bought::wasBought($product->id);
+    	return view('product.show',compact('product','wasBought'));
     }
 
     public function sale()

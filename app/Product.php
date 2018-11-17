@@ -12,7 +12,7 @@ class Product extends Model
 
     public function rate()
     {
-    	return $this->HasMany(Rate::class);
+    	return $this->HasMany(Rate::class)->latest();
     }
     public function discount()
     {

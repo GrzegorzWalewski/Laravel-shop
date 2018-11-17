@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/rate/store','RatesController@store');
+
+Route::post('/success','CartsController@success');
+
 Route::get('/buy','CartsController@submit');
 
 Route::get('/cart/increase/{cart}','CartsController@increase');

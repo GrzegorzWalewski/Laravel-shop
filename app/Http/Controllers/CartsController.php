@@ -6,25 +6,39 @@ use Illuminate\Http\Request;
 use Shop\Cart;
 use Illuminate\Support\Facades\Auth;
 use Shop\Product;
+use Shop\Bought;
 
 class CartsController extends Controller
 {
     public function store()
     {
-    	if(Cart::where('user_id',Auth::user()->id)->where('product_id',request('id'))->count()>0)
-    	{
-    		Cart::where('user_id',Auth::user()->id)->where('product_id',request('id'))->increment('pieces');
-    	}
-    	else
-    	{
-	    	$product_id = request('id');
-	    	Cart::Create([
-	    		'user_id' 	 => Auth::user()->id,
-	    		'product_id' => $product_id,
-                'price'      => Product::getDetails($product_id)->price,
-	    		'pieces'	 => 1
-	    		]);
-    	}
+        if(request('quantity')>1)
+        {
+            $i = request('quantity');
+        }
+        else
+        {
+            $i = 1;
+        }
+        for($i;$i>0;$i--)
+        {
+        	if(Cart::where('user_id',Auth::user()->id)->where('product_id',request('id'))->count()>0)
+        	{
+
+                Cart::where('user_id',Auth::user()->id)->where('product_id',request('id'))->increment('pieces'); 
+
+        	}
+        	else
+        	{
+    	    	$product_id = request('id');
+    	    	Cart::Create([
+    	    		'user_id' 	 => Auth::user()->id,
+    	    		'product_id' => $product_id,
+                    'price'      => Product::getDetails($product_id)->price,
+    	    		'pieces'	 => 1
+    	    		]);
+        	}
+        }
     	return Cart::countWithPieces();
     }
     public function show()
@@ -98,5 +112,23 @@ class CartsController extends Controller
         $chk = $paymentDetails['pin'].$paymentDetails['api_version'].$paymentDetails['id'].$paymentDetails['amount'].$paymentDetails['currency'].$paymentDetails['description'].$paymentDetails['url'].$paymentDetails['type'].$paymentDetails['buttontext'].$paymentDetails['email'].$paymentDetails['p_email'];
         $ChkValue = hash('sha256',$chk);
         return view('product.submit', compact('paymentDetails','ChkValue'));
+    }
+    public function success()
+    {
+        if(request('status')=="OK")
+        {
+            $carts = Cart::where('user_id',Auth::user()->id)->get();
+            foreach ($carts as $cart) 
+            {
+                Bought::Create([
+                    'user_id'    => $cart->user_id,
+                    'product_id' => $cart->product_id,
+                    'price'      => $cart->price,
+                    'pieces'     => $cart->pieces
+                ]);
+            }
+            Cart::where('user_id',Auth::user()->id)->delete();
+        }
+        return redirect('/');
     }
 }
