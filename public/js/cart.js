@@ -9,22 +9,20 @@ else
 var starsDiv = document.getElementById('stars');
 var stars = document.getElementsByClassName('glyphicon');
 var inputStars = document.getElementById('starInput');
-if(inputStars!=null)
+inputStars.value = 1;
+starsDiv.addEventListener('click',function()
 {
-	inputStars.value = 1;
-	starsDiv.addEventListener('click',function()
+	var gold = 0;
+	for(var i=0;i<stars.length;i++)
 	{
-		var gold = 0;
-		for(var i=0;i<stars.length;i++)
+		if(stars[i].classList[2]=="glyphicon-star")
 		{
-			if(stars[i].classList[2]=="glyphicon-star")
-			{
-				gold++;
-			}
+			gold++;
 		}
-		inputStars.value = gold;
-	});
-}
+	}
+	inputStars.value = gold;
+});
+
 var quant = document.getElementById('quant');
 var url = url.replace('#','');
 var products = document.getElementsByClassName("add-to-cart");

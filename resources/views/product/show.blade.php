@@ -1,9 +1,9 @@
 @extends('layouts.template')
 @section('content')
-<div class="w-100">
+<div class="col-lg-12">
     <div class="card mb-10">
-        <div class="card-body store-body row">
-            <div class="product-info col-12 col-md-6">
+        <div class="card-body store-body">
+            <div class="product-info">
               <div class="product-gallery">
                 <div class="product-gallery-featured">
                   <img src="{{ url('/') }}/storage/{{ $product->imgName }}" alt="">
@@ -18,7 +18,7 @@
                   <h2 class="mb-3">Rates</h2>
                 </div>
                 <div class="product-comments">
-                    @if(Auth::check()&&$wasBought==1)
+                    @if($wasBought==1)
                       <h5 class="mb-2">Give Your opionion of product</h5>
                       <form action="{{ url('/') }}/rate/store" class="form-inline mb-5">
                         <input type="text" name="title" placeholder="Title" class="w-75 p-3" required>
@@ -35,10 +35,14 @@
                     <h5 class="mb-5">Lastest Rates</h5>
                     <ol class="list-unstyled last-questions-list">
                         @foreach($product->rate as $rate)
-                            <li class="rateLi row">
+                            <li class="rateLi">
+                                <div class="opinion">
+                                    <p class="divider">{{ $rate->title }}</p>
+                                    <p>{{ $rate->body }}</p>
+                                </div>
                                 @php ($gold = $rate->rate)
                                 @php ($grey = 5-$rate->rate)
-                                <div class="star-container col-12 mb-4">
+                                <div class="star-container">
                                     @for($i=0; $i<$gold;$i++)
                                         <span class="gold fa fa-star"></span>
                                     @endfor
@@ -46,10 +50,6 @@
                                     @for($i=0; $i<$grey;$i++)
                                         <span class=" fa fa-star disable"></span>
                                     @endfor
-                                </div>
-                                <div class="opinion col-12">
-                                    <p class="divider">{{ $rate->title }}</p>
-                                    <p>{{ $rate->body }}</p>
                                 </div>
                             </li>
                         @endforeach
@@ -60,7 +60,7 @@
                 </div>
               </div>
             </div>
-            <div class="product-payment-details col-12 col-md-6">
+            <div class="product-payment-details">
                 @if(Auth::check()&&Auth::user()->isAdmin())
                     <a href="{{ url('/') }}/products/del/{{ $product->id }}">Delete</a>
                     <a href="{{ url('/') }}/products/edit/{{ $product->id }}">Edit</a>
@@ -89,7 +89,7 @@
                 @endif
               <p class="mb-0"><i class="fa fa-truck"></i> Delivery in all territory</p>
               <label for="quant">Quantity</label>
-              <input type="number" name="quantity" min="1" id="quant" class="form-control mb-5 input-lg" placeholder="Choose the quantity" value="1" required="">
+              <input type="number" name="quantity" min="1" id="quant" class="form-control mb-5 input-lg" placeholder="Choose the quantity" required="">
               <button id="{{ $product->id }}" class="btn btn-primary btn-lg btn-block add-to-cart">Add to cart</button>
               
             </div>
