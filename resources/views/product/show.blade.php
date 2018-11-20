@@ -89,7 +89,7 @@
                 @endif
               <p class="mb-0"><i class="fa fa-truck"></i> Delivery in all territory</p>
               <label for="quant">Quantity</label>
-              <input type="number" name="quantity" min="1" id="quant" class="form-control mb-5 input-lg" placeholder="Choose the quantity" required="">
+              <input type="number" name="quantity" min="1" id="quant" class="form-control mb-5 input-lg" placeholder="Choose the quantity" value="1" required="">
               <button id="{{ $product->id }}" class="btn btn-primary btn-lg btn-block add-to-cart">Add to cart</button>
               
             </div>
