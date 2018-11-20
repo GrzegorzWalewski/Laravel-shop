@@ -9,6 +9,8 @@ use Shop\Discount;
 use Illuminate\Support\Facades\Auth;
 use Shop\User;
 use Shop\Bought;
+use Shop\Rate;
+use Shop\Cart;
 class ProductsController extends Controller
 {
     public function index()
@@ -85,6 +87,8 @@ class ProductsController extends Controller
     }
     public function del(Product $product)
     {
+        Rate::where('product_id',$product->id)->delete();
+        Cart::where('product_id',$product->id)->delete();
         $product->delete();
         return redirect('/');
     }

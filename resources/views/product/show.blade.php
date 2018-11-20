@@ -1,9 +1,9 @@
 @extends('layouts.template')
 @section('content')
-<div class="col-lg-12">
+<div class="w-100">
     <div class="card mb-10">
-        <div class="card-body store-body">
-            <div class="product-info">
+        <div class="card-body store-body row">
+            <div class="product-info col-12 col-md-6">
               <div class="product-gallery">
                 <div class="product-gallery-featured">
                   <img src="{{ url('/') }}/storage/{{ $product->imgName }}" alt="">
@@ -35,14 +35,10 @@
                     <h5 class="mb-5">Lastest Rates</h5>
                     <ol class="list-unstyled last-questions-list">
                         @foreach($product->rate as $rate)
-                            <li class="rateLi">
-                                <div class="opinion">
-                                    <p class="divider">{{ $rate->title }}</p>
-                                    <p>{{ $rate->body }}</p>
-                                </div>
+                            <li class="rateLi row">
                                 @php ($gold = $rate->rate)
                                 @php ($grey = 5-$rate->rate)
-                                <div class="star-container">
+                                <div class="star-container col-12 mb-4">
                                     @for($i=0; $i<$gold;$i++)
                                         <span class="gold fa fa-star"></span>
                                     @endfor
@@ -50,6 +46,10 @@
                                     @for($i=0; $i<$grey;$i++)
                                         <span class=" fa fa-star disable"></span>
                                     @endfor
+                                </div>
+                                <div class="opinion col-12">
+                                    <p class="divider">{{ $rate->title }}</p>
+                                    <p>{{ $rate->body }}</p>
                                 </div>
                             </li>
                         @endforeach
@@ -60,7 +60,7 @@
                 </div>
               </div>
             </div>
-            <div class="product-payment-details">
+            <div class="product-payment-details col-12 col-md-6">
                 @if(Auth::check()&&Auth::user()->isAdmin())
                     <a href="{{ url('/') }}/products/del/{{ $product->id }}">Delete</a>
                     <a href="{{ url('/') }}/products/edit/{{ $product->id }}">Edit</a>
