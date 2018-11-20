@@ -18,7 +18,7 @@
                   <h2 class="mb-3">Rates</h2>
                 </div>
                 <div class="product-comments">
-                    @if($wasBought==1)
+                    @if(Auth::check()&&$wasBought==1)
                       <h5 class="mb-2">Give Your opionion of product</h5>
                       <form action="{{ url('/') }}/rate/store" class="form-inline mb-5">
                         <input type="text" name="title" placeholder="Title" class="w-75 p-3" required>

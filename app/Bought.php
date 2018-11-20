@@ -3,6 +3,7 @@
 namespace Shop;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Bought extends Model
 {
@@ -10,14 +11,22 @@ class Bought extends Model
 
     public static function wasBought($id)
     {
-    	$result = Bought::where('product_id', $id)->where('user_id',auth()->user()->id)->count();
-    	if($result!=0)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return "";
-    	}
+        if(Auth::check())
+        {
+            $result = Bought::where('product_id', $id)->where('user_id',auth()->user()->id)->count();
+            if($result!=0)
+            {
+                return true;
+            }
+            else
+            {
+                return "";
+            }
+        }
+        else
+        {
+            return "";
+        }
+    	
     }
 }
