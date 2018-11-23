@@ -6,7 +6,7 @@
             <div class="product-info">
               <div class="product-gallery">
                 <div class="product-gallery-featured">
-                  <img src="{{ url('/') }}/storage/{{ $product->imgName }}" alt="">
+                  <img style="max-width: 100%" src="{{ url('/') }}/storage/{{ $product->imgName }}" alt="">
                 </div>
               </div>
               <div class="product-seller-recommended">
