@@ -5,6 +5,9 @@ namespace Shop\Http\Controllers;
 use Illuminate\Http\Request;
 use Shop\Category;
 use Shop\Product;
+use Shop\Bought;
+use Shop\Rate;
+use Shop\Cart;
 
 class CategorysController extends Controller
 {
@@ -35,7 +38,14 @@ class CategorysController extends Controller
     }
     public function del(Category $category)
     {
-    	$id= $category->id;
+    	$id = $category->id;
+        $products = Product::whereCategoryId($id)->get();
+        foreach($products as $product)
+        {
+            Rate::where('product_id',$product->id)->delete();
+            Cart::where('product_id',$product->id)->delete();
+            Bought::where('product_id',$product->id)->delete();
+        }
     	Product::whereCategoryId($id)->delete();
     	$category->delete();
     	return back();

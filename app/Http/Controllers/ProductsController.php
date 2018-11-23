@@ -85,6 +85,12 @@ class ProductsController extends Controller
     }
     public function del(Product $product)
     {
+<<<<<<< HEAD
+=======
+        Rate::where('product_id',$product->id)->delete();
+        Cart::where('product_id',$product->id)->delete();
+        Bought::where('product_id',$product->id)->delete();
+>>>>>>> master
         $product->delete();
         return redirect('/');
     }
